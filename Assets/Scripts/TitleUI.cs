@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using Firebase.Auth;
 using Firebase.Extensions;
-using Unity.VisualScripting;
 
 public class TitleUI : MonoBehaviour
 {
@@ -72,7 +71,8 @@ public class TitleUI : MonoBehaviour
                 return;
             }
             // 로그인 성공 -> 씬 전환
-            Debug.Log("로비로");
+            AuthResult result = t.Result;
+            Debug.Log(result.User.UserId);
             PopupMessageManager.Instance.PopupMessage("로그인 성공");
         });
     }
@@ -94,6 +94,8 @@ public class TitleUI : MonoBehaviour
             }
             // 회원가입 성공
             Debug.Log("닉네임 등록");
+            AuthResult result = t.Result;
+            Debug.Log(result.User.UserId);
             PopupMessageManager.Instance.PopupMessage("회원가입 성공");
         });
     }
