@@ -48,11 +48,11 @@
 ![](https://static.inven.co.kr/column/2017/09/16/news/i13577284414.jpg)  
 #### 타임어택
 레이드 시간에 따른 광폭화 구현,
-보스의 데미지가 쎄지고 HP를 회복하여 공략이 어려워짐.
+보스의 데미지가 쎄지고 HP를 회복하여 공략이 어려워짐.  
 ![](http://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/f1273958ee2e44fca6ad7b6ca3885a24/1a681d93f79840d28e120ab11cd649be_1527851806.png)  
 #### 사망
 죽은 후에도 관전을 할수 있도록 조작 변경  
-한명을 포커싱하고 지켜보는 화면.
+한명을 포커싱하고 지켜볼 수 있는 화면.  
 ![](https://upload3.inven.co.kr/upload/2022/08/11/bbs/i14265731425.jpg?MW=800)  
 #### 데이터 저장
 <u>*Firebase Firestore*</u>로 저장
