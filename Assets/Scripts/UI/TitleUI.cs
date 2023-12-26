@@ -5,6 +5,7 @@ using TMPro;
 using Firebase.Auth;
 using Firebase.Firestore;
 using Firebase.Extensions;
+using System;
 
 public class TitleUI : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class TitleUI : MonoBehaviour
             PopupMessageManager.Instance.PopupMessage("입력 필요");
             return;
         }
+        PopupMessageManager.Instance.PopupMessage("로그인...");
         TryLogin(IF_email.text, IF_password.text);
     }
 
@@ -75,15 +77,14 @@ public class TitleUI : MonoBehaviour
             }
             // 로그인 성공 -> 씬 전환
             AuthResult result = t.Result;
-            Debug.Log(result.User.UserId);
             PopupMessageManager.Instance.PopupMessage("로그인 성공");
-            PhotonManager.StartPhotonNetworking();
         });
+        GameObject.FindObjectOfType<PhotonManager>().StartPhotonNetworking();
     }
 
     void TryRegister(string email, string password, string nickname)
     {
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(t =>
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(async t =>
         {
             if (t.IsCanceled)
             {
@@ -97,15 +98,12 @@ public class TitleUI : MonoBehaviour
                 return;
             }
             // 회원가입 성공
-            Debug.Log("닉네임 등록");
             AuthResult result = t.Result;
-            Debug.Log(result.User.UserId);
 
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("email", result.User.UserId);
+            dic.Add("email", result.User.Email);
             dic.Add("nickname", nickname);
-            store.Collection("users").Document(result.User.UserId).SetAsync(dic);
-
+            await store.Collection("users").Document(result.User.UserId).SetAsync(dic);
             PopupMessageManager.Instance.PopupMessage("회원가입 성공");
         });
     }
