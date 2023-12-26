@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "475419038196",
+    "project_id": "lostarkclone-29a1b",
+    "storage_bucket": "lostarkclone-29a1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475419038196:android:87d558c7fd61122539a9a1",
+        "android_client_info": {
+          "package_name": "com.PSG.LostArkClone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXp90FROAblpBBvSdHAMqTFvRmO6iY104"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
