@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Firebase.Auth;
+using Firebase.Firestore;
 using Firebase.Extensions;
 
 public class TitleUI : MonoBehaviour
 {
     FirebaseAuth auth;
+    FirebaseFirestore store;
 
     [SerializeField] TMP_InputField IF_email;
     [SerializeField] TMP_InputField IF_password;
@@ -20,6 +22,7 @@ public class TitleUI : MonoBehaviour
     void Awake()
     {
         auth = FirebaseAuth.DefaultInstance;
+        store = FirebaseFirestore.DefaultInstance;
     }
 
     void Start()
@@ -74,6 +77,7 @@ public class TitleUI : MonoBehaviour
             AuthResult result = t.Result;
             Debug.Log(result.User.UserId);
             PopupMessageManager.Instance.PopupMessage("로그인 성공");
+            PhotonManager.StartPhotonNetworking();
         });
     }
 
@@ -96,6 +100,12 @@ public class TitleUI : MonoBehaviour
             Debug.Log("닉네임 등록");
             AuthResult result = t.Result;
             Debug.Log(result.User.UserId);
+
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("email", result.User.UserId);
+            dic.Add("nickname", nickname);
+            store.Collection("users").Document(result.User.UserId).SetAsync(dic);
+
             PopupMessageManager.Instance.PopupMessage("회원가입 성공");
         });
     }
