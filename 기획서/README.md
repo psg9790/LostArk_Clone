@@ -26,16 +26,17 @@
 #### 조작
 쿼터뷰에 맞게 우클릭으로 땅을 찍어 이동하는 조작
 
-#### 모델링
-발탄 (몬스터)
-![발탄](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbEHIKO%2FbtspxcpoIs9%2F1xOdpaoEE8xow2Q0Ap7Kgk%2Fimg.webp)
-레이드 맵
-![부활한 마수의 심장](https://i.namu.wiki/i/jq_X8f5nIeg-f4IR3NL4CGYtfzV66IxuMyRi2b8dwuMDR5vJER29JzUtrP-0chr8pOFk4PhBeU7jUR7bsEOv5OBT5GRcrL9LGJSpXPcHxudZHllSaLtWWF4fpQGgi00dNhap2KpNRr-v9LHbrEM17w.webp)  
 #### 실시간 채팅
 <u>*Firebase Realtime Database*</u>로 구현
 
 
 ## 레이드 씬
+#### 모델링
+발탄 (몬스터)
+![발탄](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbEHIKO%2FbtspxcpoIs9%2F1xOdpaoEE8xow2Q0Ap7Kgk%2Fimg.webp)
+레이드 맵
+![부활한 마수의 심장](https://i.namu.wiki/i/jq_X8f5nIeg-f4IR3NL4CGYtfzV66IxuMyRi2b8dwuMDR5vJER29JzUtrP-0chr8pOFk4PhBeU7jUR7bsEOv5OBT5GRcrL9LGJSpXPcHxudZHllSaLtWWF4fpQGgi00dNhap2KpNRr-v9LHbrEM17w.webp)  
+
 #### 실시간 멀티플레이
 <u>*Photon View*</u>를 이용
 - 위치 및 애니메이션 동기화
