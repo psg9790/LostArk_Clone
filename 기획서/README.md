@@ -18,7 +18,7 @@
 #### 매치메이킹
 모든 유저가 한곳에 모이는 로비.
 매치메이킹 기능을 통해 4명을 랜덤매칭한 후 레이드에 입장함.  
-
+![](https://static.inven.co.kr/column/2023/02/03/news/i15778576269.png)  
 #### 카메라
 <u>*Cinemachine*</u>을 이용한 쿼터 뷰를 구현.  
 거리별 3단 카메라로 설계, 마우스 스크롤을 굴리는 것으로 조절 가능하도록 함. 
@@ -40,8 +40,9 @@
 #### 실시간 멀티플레이
 <u>*Photon View*</u>를 이용
 - 위치 및 애니메이션 동기화
-- 이펙트 동기화
+- 이펙트 동기화  
 
+![](https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/2134147d66c24c69b2704b6069197d7a/5de5ea4b83c641e6b1b2ea8dcebb7916_1608214311.png)  
 #### HP/ MP/ 스킬
 화면 하단에 각종 스킬들과 HP/ MP UI를 띄워줌.
 스킬들은 쿨타임까지 표시할 수 있도록 함.
@@ -49,11 +50,11 @@
 #### 타임어택
 레이드 시간에 따른 광폭화 구현,
 보스의 데미지가 쎄지고 HP를 회복하여 공략이 어려워짐.
-
+![](http://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/f1273958ee2e44fca6ad7b6ca3885a24/1a681d93f79840d28e120ab11cd649be_1527851806.png)  
 #### 사망
 죽은 후에도 관전을 할수 있도록 조작 변경  
 한명을 포커싱하고 지켜보는 화면.
-
+![](https://upload3.inven.co.kr/upload/2022/08/11/bbs/i14265731425.jpg?MW=800)  
 #### 데이터 저장
 <u>*Firebase Firestore*</u>로 저장
 - 재화
