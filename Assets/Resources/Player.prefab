@@ -805,6 +805,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada999ea267281a4a9d45015f7d8cb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  q_factory: {fileID: 675161360108791972, guid: f67e08754299bc64783a01ce915bceb3,
+    type: 3}
+  w_factory: {fileID: 1814315751473787963, guid: 7c0edbae8448da5458edef0a145af8ba,
+    type: 3}
+  e_factory: {fileID: 2510883309010884760, guid: 053c5ccefcf2f584fa2a3a4744b21798,
+    type: 3}
+  r_factory: {fileID: 7849791404790678207, guid: 6d8d2e684d2843e408766c8060cfb9d4,
+    type: 3}
+  a_factory: {fileID: 5904719056005892913, guid: 344f74973481601478394de2ec2f927c,
+    type: 3}
+  s_factory: {fileID: 4021103657954561961, guid: 0109a503bc3381d45aaf4c0cfa8cb3e5,
+    type: 3}
+  d_factory: {fileID: 5880797563127281583, guid: 64eba0b0389f2f14ebe423e477747afd,
+    type: 3}
+  f_factory: {fileID: 2708598583397607911, guid: 7265add3ee071e44f821c87b076093ba,
+    type: 3}
 --- !u!95 &6905645583869182181
 Animator:
   serializedVersion: 5
@@ -882,17 +898,41 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: moving
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: attack
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: attack2
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: attack3
+  - Type: 9
+    SynchronizeType: 1
+    Name: q
+  - Type: 9
+    SynchronizeType: 1
+    Name: w
+  - Type: 9
+    SynchronizeType: 1
+    Name: e
+  - Type: 9
+    SynchronizeType: 1
+    Name: r
+  - Type: 9
+    SynchronizeType: 1
+    Name: a
+  - Type: 9
+    SynchronizeType: 1
+    Name: s
+  - Type: 9
+    SynchronizeType: 1
+    Name: d
+  - Type: 9
+    SynchronizeType: 1
+    Name: f
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

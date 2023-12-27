@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 227698603}
   - component: {fileID: 227698602}
   - component: {fileID: 227698601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CursorPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,6 +940,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2690793505080504956, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569541094255680641, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
+        type: 3}
+      propertyPath: q_factory
+      value: 
+      objectReference: {fileID: 675161360108791972, guid: f67e08754299bc64783a01ce915bceb3,
+        type: 3}
     - target: {fileID: 9008184586068061083, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
         type: 3}
       propertyPath: sceneViewId

@@ -28,6 +28,7 @@ public class PlayerBehavior : MonoBehaviour
     NavMeshAgent navAgent;
     Animator anim;
     PhotonView photonView;
+    PlayerSkillSpawner playerSkillSpawner;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class PlayerBehavior : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
 
         anim = GetComponent<Animator>();
+        playerSkillSpawner = GetComponent<PlayerSkillSpawner>();
     }
 
     State curState = State.idle;
@@ -76,7 +78,12 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    #region skillVariables
+    Coroutine LookCursorCo;
     Coroutine attackCoroutine;
+    Coroutine skillsCoroutine;
+    #endregion
+
     void InputsReceive()
     {
         if (Input.GetKeyDown(KeyCode.Space)) // 회피
@@ -94,8 +101,11 @@ public class PlayerBehavior : MonoBehaviour
             {
                 if (curState == State.moving)
                 {
-                    anim.SetBool("moving", false);
-                    navAgent.ResetPath();
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
                 }
                 attackCoroutine = StartCoroutine(StartAttack1(1.1f, .75f, 0.75f));     // 1단공격 시작
             }
@@ -119,43 +129,104 @@ public class PlayerBehavior : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Qskill();
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Wskill();
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Eskill();
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Rskill();
             }
             if (Input.GetKeyDown(KeyCode.A))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Askill();
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Sskill();
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Dskill();
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-
+                if (curState == State.moving)
+                {
+                    CancelMoving();
+                }
+                if (curState == State.attack)
+                {
+                    CancelAttack();
+                }
+                Fskill();
             }
         }
     }
 
+    #region stateUpdate
     void IdleUpdate()
     {
 
@@ -171,6 +242,19 @@ public class PlayerBehavior : MonoBehaviour
     void AttackUpdate()
     {
 
+    }
+    #endregion
+
+    #region baseAttack
+    void CancelAttack()
+    {
+        if (attackCoroutine != null)
+            StopCoroutine(attackCoroutine);
+        if (curState == State.attack)
+            curState = State.idle;
+        anim.ResetTrigger("attack1");
+        anim.ResetTrigger("attack2");
+        anim.ResetTrigger("attack3");
     }
     IEnumerator StartAttack1(float duration, float lowerBound, float attackTiming)
     {
@@ -233,8 +317,278 @@ public class PlayerBehavior : MonoBehaviour
         curState = State.idle;
         // 막타
     }
+    #endregion
+    #region spawnFx
+    [SerializeField] GameObject q_factory;
+    [PunRPC]
+    public void SpawnQ()
+    {
+        Instantiate(q_factory, transform.position + transform.forward * 1.5f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject w_factory;
+    [PunRPC]
+    public void SpawnW()
+    {
+        Instantiate(w_factory, transform.position + transform.forward * 1.5f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject e_factory;
+    [PunRPC]
+    public void SpawnE()
+    {
+        Instantiate(e_factory, transform.position + transform.forward * 1.5f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject r_factory;
+    [PunRPC]
+    public void SpawnR()
+    {
+        GameObject newfx = Instantiate(r_factory, transform.position + transform.forward * 2f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject a_factory;
+    [PunRPC]
+    public void SpawnA()
+    {
+        GameObject newfx = Instantiate(a_factory, transform.position + transform.forward * 2f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject s_factory;
+    [PunRPC]
+    public void SpawnS()
+    {
+        GameObject newfx = Instantiate(s_factory, transform.position + transform.forward * 2f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject d_factory;
+    [PunRPC]
+    public void SpawnD()
+    {
+        GameObject newfx = Instantiate(d_factory, transform.position + transform.forward * 2f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    [SerializeField] GameObject f_factory;
+    [PunRPC]
+    public void SpawnF()
+    {
+        GameObject newfx = Instantiate(f_factory, transform.position + transform.forward * 2f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
+    #endregion
 
-    Coroutine LookCursorCo;
+    #region skills
+
+    void CancelSkillCo()
+    {
+        if (skillsCoroutine != null)
+            StopCoroutine(skillsCoroutine);
+        if (curState == State.skill)
+            curState = State.idle;
+        anim.ResetTrigger("q");
+        anim.ResetTrigger("w");
+        anim.ResetTrigger("e");
+        anim.ResetTrigger("r");
+        anim.ResetTrigger("a");
+        anim.ResetTrigger("s");
+        anim.ResetTrigger("d");
+        anim.ResetTrigger("f");
+    }
+    void Qskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(QskillCo());
+    }
+    IEnumerator QskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("q");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnQ", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Wskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(WskillCo());
+    }
+    IEnumerator WskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("w");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnW", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Eskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(EskillCo());
+    }
+    IEnumerator EskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("e");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnE", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Rskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(RskillCo());
+    }
+    IEnumerator RskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("r");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnR", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Askill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(AskillCo());
+    }
+    IEnumerator AskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("a");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnA", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Sskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(SskillCo());
+    }
+    IEnumerator SskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("s");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnS", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Dskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(DskillCo());
+    }
+    IEnumerator DskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("d");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnD", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    void Fskill()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(FskillCo());
+    }
+    IEnumerator FskillCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        anim.SetTrigger("f");
+        LookAtAnyCursorPos();
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnF", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
+    }
+    #endregion
+
+    #region lookCursor
     void LookAtCursorPos()
     {
         // 공격 방향 보기
@@ -253,6 +607,24 @@ public class PlayerBehavior : MonoBehaviour
                 LookCursorCo = StartCoroutine(LookCursorPosCo(dir));
                 //transform.forward = dir;
             }
+    }
+    void LookAtAnyCursorPos()
+    {
+        // 공격 방향 보기
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+        Debug.DrawRay(cam.transform.position, ray.direction * Mathf.Infinity, Color.red, 1f);
+        int layerMask = 1 << LayerMask.NameToLayer("Raycast");
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask))
+        {
+            Vector3 dir = hitInfo.point - transform.position;
+            dir.y = 0;
+
+            if (LookCursorCo != null)
+                StopCoroutine(LookCursorCo);
+            LookCursorCo = StartCoroutine(LookCursorPosCo(dir));
+            //transform.forward = dir;
+        }
     }
     IEnumerator LookCursorPosCo(Vector3 dir)
     {
@@ -291,4 +663,12 @@ public class PlayerBehavior : MonoBehaviour
                 }
             }
     }
+
+    void CancelMoving()
+    {
+        anim.SetBool("moving", false);
+        if (navAgent.hasPath)
+            navAgent.ResetPath();
+    }
+    #endregion
 }
