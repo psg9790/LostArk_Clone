@@ -7,6 +7,7 @@ using Firebase.Firestore;
 using Firebase.Extensions;
 using Photon.Realtime;
 using System;
+using Unity.VisualScripting;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -43,8 +44,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("InGame");
+        }
+        else
+        {
+            PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.Euler(Vector3.zero), 0);
+        }
         PopupMessageManager.Instance.PopupMessage("방 입장 완료!");
-        PhotonNetwork.LoadLevel("InGame");
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

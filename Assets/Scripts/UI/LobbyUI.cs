@@ -7,15 +7,17 @@ using Photon.Realtime;
 using Firebase.Firestore;
 using Firebase.Auth;
 using Firebase.Extensions;
+using UnityEngine.UI;
 
 public class LobbyUI : MonoBehaviour
 {
     [SerializeField] GameObject roomItemFactory;
-
+    string curRoomName;
+    [SerializeField] GameObject joinRoomUI;
     void Start()
     {
         go_createRoom.SetActive(false);
-
+        joinRoomUI.SetActive(false);
         // CollectionReference colRef = FirebaseFirestore.DefaultInstance.Collection("users");
         // DocumentReference reference = colRef.Document(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
         // reference.GetSnapshotAsync().ContinueWithOnMainThread(t =>
@@ -44,7 +46,31 @@ public class LobbyUI : MonoBehaviour
         //     }
         // });
     }
+    public void SetCurRoomName(string v_roomName)
+    {
+        curRoomName = v_roomName;
+    }
 
+    public string GetCurRoomName()
+    {
+        return curRoomName;
+    }
+    public void OnJoinButtonClick()
+    {
+        joinRoomUI.SetActive(true);
+    }
+    public void OnJoinRoomButtonClick()
+    {
+        PhotonNetwork.JoinRoom(curRoomName);
+    }
+    public void OnJoinRoomCancelClick()
+    {
+        joinRoomUI.SetActive(false);
+    }
+    public GameObject GetJoinUI()
+    {
+        return joinRoomUI;
+    }
 
     #region create_rooom
     // 방 생성
@@ -99,10 +125,10 @@ public class LobbyUI : MonoBehaviour
                 {
                     GameObject new_roomitem = Instantiate(roomItemFactory, content_roomlist);
                     new_roomitem.GetComponent<RoomItem>().SetTexts(info.Name, $"({info.PlayerCount}/{info.MaxPlayers})");
+                    new_roomitem.GetComponent<RoomItem>().SetLobbyUI(this);
                     roomDic.Add(info.Name, new_roomitem);
                 }
             }
-
         }
     }
 }

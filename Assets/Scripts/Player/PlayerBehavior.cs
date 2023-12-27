@@ -26,9 +26,14 @@ public class PlayerBehavior : MonoBehaviour
     CamFollower camFollower;
     NavMeshAgent navAgent;
     Animator anim;
+    PhotonView photonView;
 
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
+        if (photonView.IsMine == false)
+            return;
+
         cam = Camera.main;
         camFollower = cam.GetComponent<CamFollower>();
         camFollower.SetPlayerTarget(this.transform);
@@ -41,6 +46,9 @@ public class PlayerBehavior : MonoBehaviour
     State curState = State.idle;
     void Update()
     {
+        if (photonView.IsMine == false)
+            return;
+
         InputsReceive();
 
         switch (curState)
