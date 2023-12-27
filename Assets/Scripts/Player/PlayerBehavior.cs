@@ -14,6 +14,7 @@ public class PlayerBehavior : MonoBehaviour
         moving,
         attack,
         skill,
+        space,
 
         // battle
         stiff,
@@ -62,6 +63,8 @@ public class PlayerBehavior : MonoBehaviour
             case State.attack:
                 AttackUpdate();
                 break;
+            case State.space:
+                break;
             case State.skill:
                 break;
             case State.stiff:
@@ -76,6 +79,11 @@ public class PlayerBehavior : MonoBehaviour
     Coroutine attackCoroutine;
     void InputsReceive()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) // 회피
+        {
+
+        }
+
         if (Input.GetMouseButtonDown(0))  // 기본공격
         {
             if (curState != State.attack

@@ -10,7 +10,7 @@ public class CharacterLoader : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PopupMessageManager.Instance.PopupMessage("i am manager");
+            //PopupMessageManager.Instance.PopupMessage("i am manager");
             PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.Euler(Vector3.zero), 0);
         }
 
