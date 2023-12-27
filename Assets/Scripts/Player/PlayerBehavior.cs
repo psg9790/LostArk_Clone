@@ -71,10 +71,10 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))  // 기본공격
         {
             if (curState != State.attack
-            && curState != State.knockback
-            && curState != State.knockdown
-            && curState != State.stiff
-            && curState != State.skill)
+                && curState != State.knockback
+                && curState != State.knockdown
+                && curState != State.stiff
+                && curState != State.skill)
             {
                 if (curState == State.moving)
                 {
@@ -87,12 +87,55 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButton(1))    // 이동
         {
             if (curState != State.attack
-            && curState != State.knockback
-            && curState != State.knockdown
-            && curState != State.stiff
-            && curState != State.skill)
+                && curState != State.knockback
+                && curState != State.knockdown
+                && curState != State.stiff
+                && curState != State.skill)
             {
                 RaycastFloor();
+            }
+        }
+
+        if (curState != State.knockback
+                    && curState != State.knockdown
+                    && curState != State.stiff
+                    && curState != State.skill)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
             }
         }
     }
