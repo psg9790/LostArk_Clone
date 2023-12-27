@@ -167,7 +167,7 @@ public class PlayerBehavior : MonoBehaviour
     IEnumerator StartAttack1(float duration, float lowerBound, float attackTiming)
     {
         LookAtCursorPos();
-        Debug.Log("attack1");
+        // Debug.Log("attack1");
         curState = State.attack;
         anim.SetTrigger("attack");
         //anim.Play("base1");
@@ -191,7 +191,7 @@ public class PlayerBehavior : MonoBehaviour
 
     IEnumerator StartAttack2(float duration, float lowerBound, float attackTiming)
     {
-        Debug.Log("attack2");
+        // Debug.Log("attack2");
         LookAtCursorPos();
         curState = State.attack;
         anim.SetTrigger("attack2");
@@ -215,7 +215,7 @@ public class PlayerBehavior : MonoBehaviour
     }
     IEnumerator StartAttack3(float duration, float lowerBound, float attackTiming)
     {
-        Debug.Log("attack3");
+        // Debug.Log("attack3");
         LookAtCursorPos();
         curState = State.attack;
         anim.SetTrigger("attack3");
@@ -232,7 +232,8 @@ public class PlayerBehavior : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(cam.transform.position, ray.direction * Mathf.Infinity, Color.red, 1f);
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        int layerMask = 1 << LayerMask.NameToLayer("Player");
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ~layerMask))
             if (hitInfo.transform.CompareTag("Floor"))   // 바닥 찍었으면
             {
                 Vector3 dir = hitInfo.point - transform.position;
@@ -264,7 +265,8 @@ public class PlayerBehavior : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(cam.transform.position, ray.direction * Mathf.Infinity, Color.red, 1f);
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        int layerMask = 1 << LayerMask.NameToLayer("Player");
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ~layerMask))
             if (hitInfo.transform.CompareTag("Floor"))   // 바닥 찍었으면
             {
                 NavMeshPath path = new NavMeshPath();
