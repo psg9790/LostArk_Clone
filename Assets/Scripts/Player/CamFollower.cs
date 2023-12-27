@@ -5,23 +5,30 @@ using Cinemachine;
 
 public class CamFollower : MonoBehaviour
 {
-    Transform player;
+    [SerializeField] Transform player;
     [SerializeField] Vector3 offset;
-    // [SerializeField] CinemachineVirtualCamera vc;
+    CinemachineBrain cb;
 
+    void Start()
+    {
+        cb = GetComponent<CinemachineBrain>();
+        cb.enabled = false;
+    }
 
     public void SetPlayerTarget(Transform trans)
     {
         player = trans;
-        // vc.Follow = player;
-        // vc.LookAt = player;
     }
 
     void LateUpdate()
     {
         if (player != null)
         {
-            transform.position = player.position + offset;
+            if (cb.enabled == false)
+            {
+                transform.position = player.position + offset;
+                transform.forward = player.position - transform.position;
+            }
         }
     }
 }
