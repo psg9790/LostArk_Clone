@@ -6,13 +6,22 @@ using Cinemachine;
 public class CamFollower : MonoBehaviour
 {
     Transform player;
-    [SerializeField] CinemachineVirtualCamera vc;
+    [SerializeField] Vector3 offset;
+    // [SerializeField] CinemachineVirtualCamera vc;
 
 
     public void SetPlayerTarget(Transform trans)
     {
         player = trans;
-        vc.Follow = player;
-        vc.LookAt = player;
+        // vc.Follow = player;
+        // vc.LookAt = player;
+    }
+
+    void LateUpdate()
+    {
+        if (player != null)
+        {
+            transform.position = player.position + offset;
+        }
     }
 }
