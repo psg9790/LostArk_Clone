@@ -193,6 +193,7 @@ public class PlayerBehavior : MonoBehaviour
                 }
             }
             yield return null;
+
         }
         curState = State.idle;
     }
@@ -261,6 +262,7 @@ public class PlayerBehavior : MonoBehaviour
             elapsed += Time.deltaTime;
             transform.rotation = Quaternion.LookRotation(Vector3.Lerp(transform.forward, dir, 0.1f));
             yield return null;
+
         }
         transform.forward = dir;
     }
