@@ -940,19 +940,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2690793505080504956, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9008184586068061083, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
         type: 3}
       propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9008184586068061083, guid: 5c40bc42b9ecdf042a460318aa99a3ed,
-        type: 3}
-      propertyPath: ObservedComponents.Array.size
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
