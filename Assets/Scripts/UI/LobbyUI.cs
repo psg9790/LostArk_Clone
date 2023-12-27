@@ -15,10 +15,10 @@ public class LobbyUI : MonoBehaviour
     void Start()
     {
         go_createRoom.SetActive(false);
-        //Debug.Log(FirebaseFirestore.DefaultInstance.App);
-        // FirebaseFirestore.DefaultInstance.Collection("users")
-        // .Document(FirebaseAuth.DefaultInstance.CurrentUser.UserId).GetSnapshotAsync()
-        // .ContinueWithOnMainThread(t =>
+
+        // CollectionReference colRef = FirebaseFirestore.DefaultInstance.Collection("users");
+        // DocumentReference reference = colRef.Document(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+        // reference.GetSnapshotAsync().ContinueWithOnMainThread(t =>
         // {
         //     if (t.IsCanceled)
         //     {
@@ -32,8 +32,16 @@ public class LobbyUI : MonoBehaviour
         //         return;
         //     }
         //     DocumentSnapshot snapshot = t.Result;
-        //     Dictionary<string, object> dic = snapshot.ToDictionary();
-        //     PhotonNetwork.NickName = (string)dic.GetValueOrDefault("nickname", "guest");
+        //     if (snapshot.Exists)
+        //     {
+        //         Dictionary<string, object> dic = snapshot.ToDictionary();
+        //         PhotonNetwork.NickName = dic.GetValueOrDefault("nickname", "guest").ToString();
+        //         Debug.Log(PhotonNetwork.NickName);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Document does not exist");
+        //     }
         // });
     }
 

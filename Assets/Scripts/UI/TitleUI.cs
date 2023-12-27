@@ -79,6 +79,8 @@ public class TitleUI : MonoBehaviour
             AuthResult result = t.Result;
             PopupMessageManager.Instance.PopupMessage("로그인 성공");
         });
+        PopupMessageManager.Instance.PopupMessage(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+        Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
         GameObject.FindObjectOfType<PhotonManager>().StartPhotonNetworking();
     }
 

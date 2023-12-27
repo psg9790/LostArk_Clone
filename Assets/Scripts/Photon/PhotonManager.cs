@@ -30,27 +30,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        //Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
-        // App ID
-        // FirebaseFirestore.DefaultInstance.Collection("users")
-        // .Document(FirebaseAuth.DefaultInstance.CurrentUser.UserId).GetSnapshotAsync()
-        // .ContinueWithOnMainThread(t =>
-        // {
-        //     if (t.IsCanceled)
-        //     {
-        //         Debug.LogError("Canceled");
-        //         return;
-        //     }
-        //     if (t.IsFaulted)
-        //     {
-        //         Debug.LogError("Faulted\n" + t.Exception.Message);
-        //         PopupMessageManager.Instance.PopupMessage(t.Exception.Message);
-        //         return;
-        //     }
-        //     DocumentSnapshot snapshot = t.Result;
-        //     Dictionary<string, object> dic = snapshot.ToDictionary();
-        //     PhotonNetwork.NickName = (string)dic.GetValueOrDefault("nickname", "guest");
-        // });
         // 로비 접속
         PhotonNetwork.JoinLobby();
     }
