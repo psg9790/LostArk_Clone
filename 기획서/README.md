@@ -16,8 +16,10 @@
 ## 로비 씬
 #### 매치메이킹
 모든 유저가 한곳에 모이는 로비.
-매치메이킹 기능을 통해 4명을 랜덤매칭한 후 레이드에 입장함.  
+방 공개를 통해 원하는 방에서 4명을 모아 레이드에 입장함.  
 ![](https://static.inven.co.kr/column/2023/02/03/news/i15778576269.png)  
+
+## 레이드 씬
 #### 카메라
 <u>*Cinemachine*</u>을 이용한 쿼터 뷰를 구현.  
 거리별 3단 카메라로 설계, 마우스 스크롤을 굴리는 것으로 조절 가능하도록 함. 
@@ -26,10 +28,8 @@
 쿼터뷰에 맞게 우클릭으로 땅을 찍어 이동하는 조작
 
 #### 실시간 채팅
-<u>*Firebase Realtime Database*</u>로 구현
+<u>*Firebase Realtime Database*</u>로 구현  
 
-
-## 레이드 씬
 #### 모델링
 발탄 (몬스터)  
 ![발탄](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbEHIKO%2FbtspxcpoIs9%2F1xOdpaoEE8xow2Q0Ap7Kgk%2Fimg.webp)
