@@ -19,6 +19,7 @@ public class LobbyUI : MonoBehaviour
     {
         go_createRoom.SetActive(false);
         joinRoomUI.SetActive(false);
+        PhotonNetwork.NickName = GameManager.Instance.GetUserNickname();
     }
     public void SetCurRoomName(string v_roomName)
     {

@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
+using Unity.Collections;
 
 public class CamFollower : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] Vector3 offset;
     CinemachineBrain cb;
+
+    // int idx = 0;
+    // [SerializeField][ReadOnly] Transform[] childs;
 
     void Start()
     {
@@ -18,6 +23,9 @@ public class CamFollower : MonoBehaviour
     public void SetPlayerTarget(Transform trans)
     {
         player = trans;
+
+        // Transform[] childsTransform = player.Find("lookPos").GetComponentsInChildren<Transform>();
+        // Array.Copy(childsTransform, 1, childs, 0, 3);
     }
 
     void LateUpdate()
