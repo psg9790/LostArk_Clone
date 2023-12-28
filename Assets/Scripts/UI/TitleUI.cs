@@ -78,10 +78,14 @@ public class TitleUI : MonoBehaviour
             // 로그인 성공 -> 씬 전환
             AuthResult result = t.Result;
             PopupMessageManager.Instance.PopupMessage("로그인 성공");
+        }).ContinueWithOnMainThread(t =>
+        {
+            PopupMessageManager.Instance.PopupMessage(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+            Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+
+            GameManager.Instance.SetUserEmail(email);
+            GameObject.FindObjectOfType<PhotonManager>().StartPhotonNetworking();
         });
-        PopupMessageManager.Instance.PopupMessage(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
-        Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
-        GameObject.FindObjectOfType<PhotonManager>().StartPhotonNetworking();
     }
 
     void TryRegister(string email, string password, string nickname)
@@ -103,9 +107,9 @@ public class TitleUI : MonoBehaviour
             AuthResult result = t.Result;
 
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("email", result.User.Email);
+            //dic.Add("email", result.User.Email);
             dic.Add("nickname", nickname);
-            await store.Collection("users").Document(result.User.UserId).SetAsync(dic);
+            await store.Collection("users").Document(result.User.Email).SetAsync(dic);
             PopupMessageManager.Instance.PopupMessage("회원가입 성공");
         });
     }

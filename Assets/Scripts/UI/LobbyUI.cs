@@ -8,6 +8,7 @@ using Firebase.Firestore;
 using Firebase.Auth;
 using Firebase.Extensions;
 using UnityEngine.UI;
+using Photon.Pun.Demo.Cockpit;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -18,33 +19,6 @@ public class LobbyUI : MonoBehaviour
     {
         go_createRoom.SetActive(false);
         joinRoomUI.SetActive(false);
-        // CollectionReference colRef = FirebaseFirestore.DefaultInstance.Collection("users");
-        // DocumentReference reference = colRef.Document(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
-        // reference.GetSnapshotAsync().ContinueWithOnMainThread(t =>
-        // {
-        //     if (t.IsCanceled)
-        //     {
-        //         Debug.LogError("Canceled");
-        //         return;
-        //     }
-        //     if (t.IsFaulted)
-        //     {
-        //         Debug.LogError("Faulted\n" + t.Exception.Message);
-        //         PopupMessageManager.Instance.PopupMessage(t.Exception.Message);
-        //         return;
-        //     }
-        //     DocumentSnapshot snapshot = t.Result;
-        //     if (snapshot.Exists)
-        //     {
-        //         Dictionary<string, object> dic = snapshot.ToDictionary();
-        //         PhotonNetwork.NickName = dic.GetValueOrDefault("nickname", "guest").ToString();
-        //         Debug.Log(PhotonNetwork.NickName);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Document does not exist");
-        //     }
-        // });
     }
     public void SetCurRoomName(string v_roomName)
     {
@@ -70,6 +44,43 @@ public class LobbyUI : MonoBehaviour
     public GameObject GetJoinUI()
     {
         return joinRoomUI;
+    }
+    public void OnLoadNickClick()
+    {
+        CollectionReference colRef = FirebaseFirestore.DefaultInstance.Collection("users");
+        DocumentReference reference = colRef.Document(GameManager.Instance.GetUserEmail());
+        reference.GetSnapshotAsync().ContinueWithOnMainThread(t =>
+        {
+            if (t.IsCanceled)
+            {
+                Debug.LogError("Canceled");
+                return;
+            }
+            if (t.IsFaulted)
+            {
+                Debug.LogError("Faulted\n" + t.Exception.Message);
+                PopupMessageManager.Instance.PopupMessage(t.Exception.Message);
+                return;
+            }
+            DocumentSnapshot snapshot = t.Result;
+            if (snapshot.Exists)
+            {
+                Dictionary<string, object> dic = snapshot.ToDictionary();
+                foreach (KeyValuePair<string, object> pair in dic)
+                {
+                    Debug.Log(string.Format("{0}: {1}", pair.Key, pair.Value));
+                }
+                string nick_name = dic["nickname"].ToString();
+                PhotonNetwork.NickName = nick_name;
+                GameManager.Instance.SetUserNickname(nick_name);
+                Debug.Log(PhotonNetwork.NickName);
+                PopupMessageManager.Instance.PopupMessage($"your nickname: {nick_name}");
+            }
+            else
+            {
+                Debug.Log("Document does not exist");
+            }
+        });
     }
 
     #region create_rooom
