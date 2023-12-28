@@ -805,6 +805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada999ea267281a4a9d45015f7d8cb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack_factory: {fileID: 4301057783707249758, guid: b02827bd6b9ee624f96bdc5ce7e25192,
+    type: 3}
   q_factory: {fileID: 675161360108791972, guid: f67e08754299bc64783a01ce915bceb3,
     type: 3}
   w_factory: {fileID: 1814315751473787963, guid: 7c0edbae8448da5458edef0a145af8ba,

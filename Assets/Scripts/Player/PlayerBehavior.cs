@@ -13,6 +13,7 @@ public class PlayerBehavior : MonoBehaviour
         idle,
         moving,
         attack,
+        lastAttack,
         skill,
         space,
 
@@ -97,7 +98,8 @@ public class PlayerBehavior : MonoBehaviour
                 && curState != State.knockback
                 && curState != State.knockdown
                 && curState != State.stiff
-                && curState != State.skill)
+                && curState != State.skill
+                && curState != State.lastAttack)
             {
                 if (curState == State.moving)
                 {
@@ -107,7 +109,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     CancelAttack();
                 }
-                attackCoroutine = StartCoroutine(StartAttack1(1.1f, .75f, 0.75f));     // 1단공격 시작
+                attackCoroutine = StartCoroutine(StartAttack1(1.5f, .75f, 0.75f));     // 1단공격 시작
             }
         }
         if (Input.GetMouseButton(1))    // 이동
@@ -250,7 +252,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (attackCoroutine != null)
             StopCoroutine(attackCoroutine);
-        if (curState == State.attack)
+        if (curState == State.attack || curState == State.lastAttack)
             curState = State.idle;
         anim.ResetTrigger("attack1");
         anim.ResetTrigger("attack2");
@@ -262,6 +264,7 @@ public class PlayerBehavior : MonoBehaviour
         // Debug.Log("attack1");
         curState = State.attack;
         anim.SetTrigger("attack");
+        BaseAttack();
         //anim.Play("base1");
         float elapsed = 0;
 
@@ -272,7 +275,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))     // 2단 공격 시작
                 {
-                    attackCoroutine = StartCoroutine(StartAttack2(1.1f, .75f, 0.75f));
+                    attackCoroutine = StartCoroutine(StartAttack2(1.5f, .75f, 0.75f));
                     yield break;
                 }
             }
@@ -288,6 +291,8 @@ public class PlayerBehavior : MonoBehaviour
         LookAtCursorPos();
         curState = State.attack;
         anim.SetTrigger("attack2");
+        BaseAttack();
+
         //anim.Play("base2");
         float elapsed = 0;
 
@@ -298,7 +303,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))     // 2단 공격 시작
                 {
-                    attackCoroutine = StartCoroutine(StartAttack3(1.1f, .75f, 0.75f));
+                    attackCoroutine = StartCoroutine(StartAttack3(1.5f, .75f, 0.75f));
                     yield break;
                 }
             }
@@ -310,7 +315,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         // Debug.Log("attack3");
         LookAtCursorPos();
-        curState = State.attack;
+        BaseAttack();
+
+        curState = State.lastAttack;
         anim.SetTrigger("attack3");
         //anim.Play("base3");
         yield return new WaitForSeconds(duration);
@@ -319,6 +326,12 @@ public class PlayerBehavior : MonoBehaviour
     }
     #endregion
     #region spawnFx
+    [SerializeField] GameObject attack_factory;
+    [PunRPC]
+    public void SpawnAttack()
+    {
+        Instantiate(attack_factory, transform.position + transform.forward * 1.5f + Vector3.up * 0.5f, Quaternion.LookRotation(transform.forward));
+    }
     [SerializeField] GameObject q_factory;
     [PunRPC]
     public void SpawnQ()
@@ -385,6 +398,29 @@ public class PlayerBehavior : MonoBehaviour
         anim.ResetTrigger("s");
         anim.ResetTrigger("d");
         anim.ResetTrigger("f");
+    }
+    void BaseAttack()
+    {
+        curState = State.skill;
+        skillsCoroutine = StartCoroutine(BaseAttackCo());
+    }
+    IEnumerator BaseAttackCo()
+    {
+        float elapsed = 0;
+        bool fxSpawned = false;
+
+        while (elapsed < .7f)
+        {
+            elapsed += Time.deltaTime;
+            if (fxSpawned == false)
+                if (elapsed > 0.3f)
+                {
+                    photonView.RPC("SpawnAttack", RpcTarget.All);
+                    fxSpawned = true;
+                }
+            yield return null;
+        }
+        curState = State.idle;
     }
     void Qskill()
     {
