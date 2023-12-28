@@ -105,11 +105,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     CancelMoving();
                 }
-                if (curState == State.attack)
-                {
-                    CancelAttack();
-                }
-                attackCoroutine = StartCoroutine(StartAttack1(1.5f, .75f, 0.75f));     // 1단공격 시작
+                attackCoroutine = StartCoroutine(StartAttack1(3f, 2.25f, 0.75f));     // 1단공격 시작
             }
         }
         if (Input.GetMouseButton(1))    // 이동
@@ -275,7 +271,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))     // 2단 공격 시작
                 {
-                    attackCoroutine = StartCoroutine(StartAttack2(1.5f, .75f, 0.75f));
+                    attackCoroutine = StartCoroutine(StartAttack2(3f, 2.25f, 0.75f));
                     yield break;
                 }
             }
@@ -303,7 +299,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))     // 2단 공격 시작
                 {
-                    attackCoroutine = StartCoroutine(StartAttack3(1.5f, .75f, 0.75f));
+                    attackCoroutine = StartCoroutine(StartAttack3(3f, 2.25f, 0.75f));
                     yield break;
                 }
             }

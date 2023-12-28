@@ -8,7 +8,7 @@ public class NIcknameLaunch : MonoBehaviour
 {
     void Start()
     {
-        PhotonView pv = GetComponent<PhotonView>();
+        PhotonView pv = GetComponentInParent<PhotonView>();
         TMP_Text tmp = GetComponent<TMP_Text>();
         if (pv.IsMine)
             tmp.text = PhotonNetwork.NickName;
